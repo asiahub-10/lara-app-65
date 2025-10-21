@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    @yield('styles')
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -16,13 +17,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link {{ request()->is('/') ? 'bg-dark text-white rounded' : '' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
+                <a class="nav-link {{ request()->is('about') ? 'bg-dark text-white rounded' : ''}}" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/contact">Contact</a>
+                <a class="nav-link {{ request()->is('student*') ? 'bg-dark text-white rounded' : '' }}" href="/students">Students</a>
                 </li>
             </ul>
             </div>
@@ -30,5 +31,6 @@
     </nav>
     @yield('content')
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>
