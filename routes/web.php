@@ -1,59 +1,94 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Trainee;
+use App\Http\Controllers\TraineeController;
 
 Route::get('/', function () {
-    $studentId = 5;
-    $round = 65;
-    return view('pages.welcome', [
-        'id' => $studentId,
-        'round' => $round
+    return view('pages.welcome',[
+        'name' => 'Mina',
+        'country' => 'BD'
     ]);
 });
-Route::get('/about', function () {
-    return view('pages.about');
-});
-Route::get('/students', function () {
-    $students = [
-        [
-            'id' => 1,
-            'name' => 'John Doe',
-            'address' => 'Jl. Raya No. 1'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Mina',
-            'address' => 'Mirpur Road No. 2'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Raju',
-            'address' => 'Palta Road No. 3'
-        ]
-    ];
-    return view('pages.students.index', [
-        'students' => $students
+Route::get('/users/{username}/profile/{id?}', function ($username, $id=null) {
+    return view('pages/users',[
+        'user' => $username,
+        'id' => $id
     ]);
 });
-Route::get('/student/{id}', function ($id) {
-    $students = [
-        [
-            'id' => 1,
-            'name' => 'John Doe',
-            'address' => 'Jl. Raya No. 1'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Mina',
-            'address' => 'Mirpur Road No. 2'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Raju',
-            'address' => 'Palta Road No. 3'
-        ]
-    ];
-    $student = $students[$id - 1];
-    // dd($student);
-    return view('pages.students.show', compact('student'));
-});
+
+// Route::get('/about', function () {
+//     return view('pages/about');
+// });
+
+// OR
+Route::view('/about', 'pages/about');
+
+// Route::get('/trainees', function () {
+//     // $trainees = [
+//     //         [
+//     //             'id' => 1,
+//     //             'name' => 'Mina',
+//     //             'email' => 'MvXbM@example.com',
+//     //             'country' => 'BD',
+//     //             'is_active' => true
+//     //         ],
+//     //         [
+//     //             'id' => 2,
+//     //             'name' => 'Raju',
+//     //             'email' => 'raju@example.com',
+//     //             'country' => 'IN',
+//     //             'is_active' => false
+//     //         ],
+//     //         [
+//     //             'id' => 3,
+//     //             'name' => 'Rani',
+//     //             'email' => 'rani@example.com',
+//     //             'country' => 'US',
+//     //             'is_active' => true
+//     //         ]
+//     //     ];
+//     return view('pages.trainees.index',[
+//         // 'trainees' => $trainees
+//         'trainees' => Trainee::all()
+//     ]);
+// });
+
+Route::get('/trainees', [TraineeController::class, 'index']);
+
+// Route::get('/trainees/{id}', function ($id) {
+//     // $trainees = [
+//     //         [
+//     //             'id' => 1,
+//     //             'name' => 'Mina',
+//     //             'email' => 'MvXbM@example.com',
+//     //             'country' => 'BD',
+//     //             'is_active' => true
+//     //         ],
+//     //         [
+//     //             'id' => 2,
+//     //             'name' => 'Raju',
+//     //             'email' => 'raju@example.com',
+//     //             'country' => 'IN',
+//     //             'is_active' => false
+//     //         ],
+//     //         [
+//     //             'id' => 3,
+//     //             'name' => 'Rani',
+//     //             'email' => 'rani@example.com',
+//     //             'country' => 'US',
+//     //             'is_active' => true
+//     //         ]
+//     //     ];
+//     // $single = array_filter($trainees, fn($item) => $item['id'] == $id);
+//     // $single = reset($single);
+//     // dd($single);
+
+//     return view('pages.trainees.show', [
+//         // 'id' => $id,
+//         // 'trainee' => $single
+//         'trainee' => Trainee::findTrainee($id)
+//     ]);
+// });
+
+Route::get('/trainees/{id}', [TraineeController::class, 'show']);

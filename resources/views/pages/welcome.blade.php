@@ -1,12 +1,21 @@
-@extends("../layout/master")
-@section('title', 'Welcome Page')
+@extends("layout.master")
+
+@section('title', 'Home')
+
 @section('content')
-<div class="container">
-    <h1>Welcome Page</h1>
-    <x-alert>
-        <p class="mb-0">Wecome to Laravel</p>
-    </x-alert>
-    <h3>Student ID: {{ $id }}</h3>
-    <h3>Student Round: {{ $round }}</h3>
-</div>
+<h1 class="text-success">Hello {{$name}}</h1>
+<h5 class="text-success">Welcome to {{$country}}</h5>
+<x-button bg="danger" :disable="true">
+    Don't Click Me
+</x-button>
+<x-button>
+    Click Me :)
+</x-button>
+
+@if(true)
+<p>True Statement</p>
+@elseif (false)
+<p>False Statement</p>
+@endif
+
 @endsection
