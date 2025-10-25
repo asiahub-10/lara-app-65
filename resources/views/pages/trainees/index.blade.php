@@ -22,7 +22,8 @@
                 <td><span class="badge bg-{{ $item['is_active'] ? 'success' : 'danger' }}">{{ $item['is_active'] ? 'Active' : 'Inactive' }}</span></td>
                 <td>
                     {{-- <a href="/trainees/{{ $item['id'] }}" class="btn btn-primary">View</a> --}}
-                    <x-button bg="dark"  href="/trainees/{{ $item['id'] }}">View</x-button>
+                    {{-- <x-button bg="dark"  href="/trainees/{{ $item['id'] }}">View</x-button> --}}
+                    <x-button bg="dark"  href="{{ route('trainee-details', $item['id']) }}">View</x-button>
                 </td>
             </tr>
             @endforeach

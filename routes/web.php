@@ -54,7 +54,7 @@ Route::view('/about', 'pages/about');
 //     ]);
 // });
 
-Route::get('/trainees', [TraineeController::class, 'index']);
+Route::get('/trainees', [TraineeController::class, 'index'])->name("trainees.index");
 
 // Route::get('/trainees/{id}', function ($id) {
 //     // $trainees = [
@@ -91,4 +91,4 @@ Route::get('/trainees', [TraineeController::class, 'index']);
 //     ]);
 // });
 
-Route::get('/trainees/{id}', [TraineeController::class, 'show']);
+Route::get('/trainees/{id}', [TraineeController::class, 'show'])->name('trainee-details');

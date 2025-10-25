@@ -1,5 +1,10 @@
 @extends("layout/master")
 @section('title', 'User')
+
+@section('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+@endsection
+
 @section('content')
 <h1>Name: {{$user}}</h1>
 

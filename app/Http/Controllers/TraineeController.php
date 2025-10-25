@@ -10,11 +10,13 @@ class TraineeController
         $trainees = Trainee::all();
         return view('pages.trainees.index', compact('trainees'));
         // return view('pages.about', [
-        //     'trainess' => $trainess
+        //     'tr' => $trainess,
+        //     'result' => $user
         // ]);
     }
     public function show($id)
     {
-        
+        $trainee = Trainee::findTrainee($id);
+        return view('pages.trainees.show', compact('trainee'));
     }
 }
