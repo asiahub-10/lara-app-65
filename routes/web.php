@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Trainee;
+use App\Models\Role;
 use App\Http\Controllers\TraineeController;
+use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
     return view('pages.welcome',[
@@ -92,3 +94,6 @@ Route::get('/trainees', [TraineeController::class, 'index'])->name("trainees.ind
 // });
 
 Route::get('/trainees/{id}', [TraineeController::class, 'show'])->name('trainee-details');
+
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+Route::get('/roles/{id}', [RoleController::class, 'show'])->name('roles.show');
