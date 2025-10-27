@@ -5,6 +5,7 @@ use App\Models\Trainee;
 use App\Models\Role;
 use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('pages.welcome',[
@@ -97,3 +98,5 @@ Route::get('/trainees/{id}', [TraineeController::class, 'show'])->name('trainee-
 
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 Route::get('/roles/{id}', [RoleController::class, 'show'])->name('roles.show');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');

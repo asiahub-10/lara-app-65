@@ -8,7 +8,7 @@ class TraineeController
     public function index()
     {
         $trainees = Trainee::all();
-        return view('pages.trainees.index', compact('trainees'));
+        return view('admin.pages.trainees.index', compact('trainees'));
         // return view('pages.about', [
         //     'tr' => $trainess,
         //     'result' => $user
@@ -17,6 +17,6 @@ class TraineeController
     public function show($id)
     {
         $trainee = Trainee::findTrainee($id);
-        return view('pages.trainees.show', compact('trainee'));
+        return view('admin.pages.trainees.show', compact('trainee'));
     }
 }

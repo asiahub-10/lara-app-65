@@ -1,4 +1,4 @@
-@extends("layout/master")
+@extends("admin/layout/master")
 @section('title', 'Role')
 @section('content')
 <div class="container">

@@ -11,7 +11,7 @@ class RoleController extends Controller
     {
         $roles = Role::all();
         // return view('pages/roles.index', compact('roles'));
-        return view('pages.roles.index', [
+        return view('admin.pages.roles.index', [
             "roles" => $roles,
             "title" => "Roles page"
         ]);
@@ -19,6 +19,6 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        return view('pages/roles.show', compact('role'));
+        return view('admin.pages/roles.show', compact('role'));
     }
 }
