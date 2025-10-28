@@ -8,17 +8,17 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    return view('pages.welcome',[
+    return view('admin.pages.welcome',[
         'name' => 'Mina',
         'country' => 'BD'
     ]);
 });
-Route::get('/users/{username}/profile/{id?}', function ($username, $id=null) {
-    return view('pages/users',[
-        'user' => $username,
-        'id' => $id
-    ]);
-});
+// Route::get('/users/{username}/profile/{id?}', function ($username, $id=null) {
+//     return view('pages/users',[
+//         'user' => $username,
+//         'id' => $id
+//     ]);
+// });
 
 // Route::get('/about', function () {
 //     return view('pages/about');
@@ -98,5 +98,9 @@ Route::get('/trainees/{id}', [TraineeController::class, 'show'])->name('trainee-
 
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 Route::get('/roles/{id}', [RoleController::class, 'show'])->name('roles.show');
+
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
