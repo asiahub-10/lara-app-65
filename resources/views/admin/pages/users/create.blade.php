@@ -22,7 +22,10 @@
             </div>
             <div class="col-md-6">
                 <label>Email</label>
-                <input type="text" name="email" class="form-control">
+                <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                @error('email')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-md-6">
                 <label>Role</label>
@@ -35,12 +38,18 @@
             <div class="col-md-6">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control">
+                @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-md-6">
                 <label>Confirm Password</label>
                 <input type="password" name="password_confirmation" class="form-control">
+                @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="col-12">
+            {{-- <div class="col-12">
                 @if($errors->any())
                 <ul class="text-danger">
                     @foreach ($errors->all() as $item)
@@ -48,7 +57,7 @@
                     @endforeach
                 </ul>
                 @endif
-            </div>
+            </div> --}}
             <div class="col-md-12 text-end">
                 <input type="submit" value="Submit" class="btn btn-success">
             </div>

@@ -73,6 +73,15 @@ class UserController extends Controller
         // dd($roles);
         return view('admin.pages.users.create', compact('roles'));
     }
+    public function edit($id)
+    {
+        $user = User::find($id);
+        $roles = Role::all();
+        // dd($user);
+        $page = request('page', 1);
+        // dd($page);
+        return view('admin.pages.users.edit', compact('roles', 'user', 'page'));
+    }
 
     public function store(Request $request)
     {
@@ -83,6 +92,7 @@ class UserController extends Controller
         // $user->last_name = $request->last_name;
         // $user->email = $request->email;  
         // $user->password = bcrypt($request->password);
+        // $user->password = Hash::make($request->password);
         // $user->role_id = $request->role_id;
         // $user->save();
 
@@ -93,7 +103,7 @@ class UserController extends Controller
             'password' => ['required', 'min:6', 'confirmed'],
         ]);
 
-        dd($request->all());
+        // dd($request->all());
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -101,7 +111,27 @@ class UserController extends Controller
             'password' => $request->password,
             'role_id' => $request->role_id
         ]);
-        dd($user);
-        // return redirect()->route('users.index')->with('success', 'User created successfully!');
+        // dd($user);
+        return redirect()->route('users.index')->with('success', 'User created successfully!');
+    }
+
+    public function Update(Request $request, $id)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            'fname' => 'required|min:2|max:20',
+            'lname' => ['required', 'min:2', 'max:20']
+        ]);
+
+        // dd($request->all());
+        $user = User::find($id);
+        $user->update([
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'role_id' => $request->role_id
+        ]);
+        // dd($user);
+        return redirect()->route('users.index', ['page' => $request->page])->with('success', 'User info updated successfully!');
     }
 }
