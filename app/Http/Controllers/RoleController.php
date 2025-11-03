@@ -7,6 +7,9 @@ use App\Models\Role;
 
 class RoleController extends Controller
 {
+    // ==============
+    // Eloquent ORM
+    // ==============
     public function index()
     {
         $roles = Role::all();

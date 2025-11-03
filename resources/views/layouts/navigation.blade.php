@@ -24,7 +24,7 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div class="flex items-center">
-                                 @if(Auth::user()->photo !== null)
+                                @if(Auth::user()->photo !== null)
                                 <img src="{{ asset('storage/' . Auth::user()->photo) }}" class=" rounded-full me-2" alt="Profile image" width="35">
                                 @else
                                 <img src="https://placehold.co/35" class=" rounded-full me-2" alt="Profile image">
