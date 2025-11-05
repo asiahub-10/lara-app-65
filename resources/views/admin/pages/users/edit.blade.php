@@ -2,6 +2,7 @@
 @section('title', 'Edit User')
 @section('content')
 <div class="container">
+    {{-- @if($user['id'] === Auth::user()->id) --}}
    <h2>User Edit</h2>
    <form action="{{ route('users.update', $user['id']) }}" method="POST">
     @csrf
@@ -47,5 +48,8 @@
             </div>
         </div>
     </form>   
+    {{-- @else
+    <h5>You are not authorized to view this page</h5>
+    @endif --}}
 </div>
 @endsection

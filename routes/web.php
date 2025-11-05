@@ -28,16 +28,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
     Route::get('/roles/{id}', [RoleController::class, 'show'])->name('roles.show');
     
-    // Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    // Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    // Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    // Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    // Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
-    // Route::patch('/users/{id}', [UserController::class, 'update'])->name('users.update');
-    // Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'index')->name('users.index');
+        Route::get('/users/create', 'create')->name('users.create');
+        Route::post('/users', 'store')->name('users.store');
+        Route::get('/users/{user}', 'show')->name('users.show');        
+    });
 
-    Route::resource('users', UserController::class);
-    Route::resource('status', StatusController::class);
+    Route::middleware('role:1,3')->group(function () {
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
+    
+    // Route::resource('/users', UserController::class)->middleware('role:1,3');
+    Route::resource('/status', StatusController::class);
 });
 
 
