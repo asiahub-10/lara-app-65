@@ -58,7 +58,7 @@
             <div class="col-md-6">
                 <label>Confirm Password</label>
                 <input type="password" name="password_confirmation" class="form-control">
-                @error('password')
+                @error('password_confirmation')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>

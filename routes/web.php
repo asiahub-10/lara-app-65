@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\GalleryController;
 use App\Mail\RegisterConfirmationMail;
 use Illuminate\Support\Facades\Mail;
 
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/users', 'index')->name('users.index');
         Route::get('/users/create', 'create')->name('users.create');
         Route::post('/users', 'store')->name('users.store');
-        Route::get('/users/{user}', 'show')->name('users.show');        
+        Route::get('/users/{user}', 'show')->name('users.show');
     });
 
     Route::middleware('role:1,3')->group(function () {
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     
     // Route::resource('/users', UserController::class)->middleware('role:1,3');
     Route::resource('/status', StatusController::class);
+    Route::resource('/gallery', GalleryController::class)->except(['edit', 'update']);
 });
 
 

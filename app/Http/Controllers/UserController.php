@@ -105,6 +105,7 @@ class UserController extends Controller
             'email' => ['required', 'email', 'unique:users'],
             'photo' => ['mimes:jpg,png,jpeg', 'image', 'max:500', 'dimensions:ratio=1/1,width=200,height=200'],
             'password' => ['required', 'min:6', 'confirmed'],
+            'password_confirmation' => ['required', 'same:password'],
         ],
         [
             'photo.mimes' => 'Profile image must be jpg, jpeg or png',
