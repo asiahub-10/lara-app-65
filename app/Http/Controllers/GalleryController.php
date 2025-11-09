@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -12,7 +13,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $galleries = Gallery::where('user_id', auth()->user()->id)->get();
+        return view('admin.pages.gallery.index', compact('galleries'));
     }
 
     /**
@@ -70,6 +72,16 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+
+        // Delete image from storage
+        if ($gallery->image) {
+            Storage::disk('public')->delete($gallery->image);
+        }
+
+        // Delete database record
+        $gallery->delete();
+
+        return redirect()->back()->with('success', 'Gallery deleted successfully.');
     }
 }
