@@ -31,19 +31,32 @@ class UserController extends Controller
         //         ->take(PHP_INT_MAX)
         //         ->get();
 
-        $users = User::from('users as u')
+        $role_filter_id = request('role_id') ?? 0;
+        // dd($role_id);
+        // if(isset($_GET['role_id'])) {
+        //     dd($_GET['role_id']);
+        // }       
+
+        $query = User::from('users as u')
                 ->select('u.id', 'u.first_name', 'u.last_name', 'u.email', 'u.photo', 'r.name as role')
                 ->join('roles as r', 'u.role_id', '=', 'r.id')
-                ->orderBy('u.id', 'desc')
+                ->orderBy('u.id', 'desc');
                 // ->skip(0)
                 // ->take(10)
                 // ->get();
-                ->paginate(3);
+                // ->paginate(10);
+
+        if($role_filter_id != 0) {
+            $query->where('u.role_id', $role_filter_id);
+        }
+        $users = $query->paginate(10);
+        $users->appends(['role_id' => $role_filter_id]);
         
         // $sl = ($users->currentPage() - 1) * $users->perPage() + 1;
                 
         // dd($users);
-        return view('admin.pages.users.index', compact('users'));
+        $roles = Role::all();
+        return view('admin.pages.users.index', compact('users', 'roles'));
     }
 
     public function show($id)
